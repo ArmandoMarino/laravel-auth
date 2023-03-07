@@ -15,9 +15,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+// GUEST HOME
 Route::get('/', [GuestHomeController::class, 'index']);
 
+// ADMIN ROUTES GROUP 
 Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(function () {
     Route::get('/', [AdminHomeController::class, 'index'])->name('home');
 });
