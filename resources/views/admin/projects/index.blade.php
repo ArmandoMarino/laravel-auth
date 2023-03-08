@@ -16,6 +16,7 @@
         <th scope="col">Slug</th>
         <th scope="col">Creato il</th>
         <th scope="col">Aggiornato il</th>
+        <th></th>
       </tr>
     </thead>
 
@@ -27,10 +28,21 @@
             <td>{{$project->slug }}</td>
             <td>{{$project->created_at }}</td>
             <td>{{$project->updated_at }}</td>
-            <td>
+            <td class="d-flex">
+                {{-- ROUTE TO SHOW --}}
                 <a class="btn btn-small btn-primary" href="{{route('admin.projects.show', $project->id)}}">
                     <i class="fa-solid fa-eye"></i>
                 </a>
+
+                <form action="{{route('admin.projects.destroy', $project->id)}}" method="POST">
+                  {{-- Method DELETE --}}
+                  @method('DELETE')
+                  {{-- TOKEN --}}
+                  @csrf
+                  <button type="submit" class="btn btn-small btn-danger" >
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </form>
             </td>
           </tr>
         @empty
