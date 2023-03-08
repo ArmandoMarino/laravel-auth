@@ -29,7 +29,11 @@
 
       @include('includes.navbar')
 
+
         <main class="container">
+            {{-- ALERT --}}
+            @include('includes.alert')
+            
             @yield('content')
         </main>
         
