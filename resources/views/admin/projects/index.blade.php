@@ -3,8 +3,10 @@
 @section('title', 'Projects')
 
 @section('content')
-<header>
-    <h1>Projects List</h1>
+<header class="d-flex align-items-center justify-content-between">
+  <h1>Projects List</h1>
+  {{-- LINK TO CREATE --}}
+  <a href="{{route('admin.projects.create')}}" class="btn btn-small btn-warning">Create new Project</a>
 </header>
 
 {{-- TABLE --}}
