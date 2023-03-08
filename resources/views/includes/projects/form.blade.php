@@ -1,7 +1,7 @@
 
 {{-- IF EXIST in create (model)update else store --}}
-@if($project->exsists)
-<form method="POST" action=" {{route('admin.projects.update')}}" class="mt-4">
+@if($project->exists)
+<form method="POST" action=" {{route('admin.projects.update', $project->id)}}" class="mt-4">
 @method('PUT')
 @else
 <form method="POST" action=" {{route('admin.projects.store')}}" class="mt-4">
@@ -29,7 +29,7 @@
             <div class="col-md-12">
                 <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
-                <textarea name="description" class="form-control" id="description" rows="3"value="{{$project->description}}"></textarea>
+                <textarea name="description" class="form-control" id="description" rows="3"> {{$project->description}}</textarea>
                 </div>
             </div>  
         </div>
