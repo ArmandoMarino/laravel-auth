@@ -4,7 +4,7 @@
 
 @section('content')
 <h1 class="mt-3">Make new Project</h1>
-<form method="POST" action="{{'admin.projects.store'}}" class="mt-4">
+<form method="POST" action=" {{route('admin.projects.store')}}" class="mt-4">
     @csrf
     <div class="row">
         <div class="col-md-6">

@@ -34,7 +34,7 @@ class ProjectController extends Controller
     {
         $data = $request->all();
         // Prendo lo SLUG nella costruzione data
-        $data['slug'] = Str::class($data['title'], '-');
+        $data['slug'] = Str::slug($data['title'], '-');
 
         $project = new Project();
 
@@ -74,6 +74,6 @@ class ProjectController extends Controller
     public function destroy(project $project)
     {
         $project->delete();
-        return to_route('admin.projects.index')->with('type', 'danger')->with('message', "Il post $project->title' è stato cancellato con successo.");
+        return to_route('admin.projects.index')->with('type', 'success')->with('message', "Il post $project->title' è stato cancellato con successo.");
     }
 }
