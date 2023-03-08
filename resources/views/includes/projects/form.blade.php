@@ -1,4 +1,3 @@
-
 {{-- IF EXIST in create (model)update else store --}}
 @if($project->exists)
 <form method="POST" action=" {{route('admin.projects.update', $project->id)}}" class="mt-4">
@@ -12,14 +11,14 @@
         <div class="col-md-6">
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input name="title" type="text" class="form-control" id="title" value="{{$project->title}}" required>
+                <input placeholder="Insert Title here..." name="title" type="text" class="form-control @error('title') is-invalid @enderror" id="title" value="{{ old('title', $project->title)}}" minlength="5" maxlength="50" required>
             </div>
         </div>
 
         <div class="col-md-6">
             <div class="mb-3">
                 <label for="image" class="form-label">Add image</label>
-                <input name="image" type="url" class="form-control" id="image" value="{{$project->image}}" required>
+                <input placeholder="Insert URL image here..." name="image" type="url" class="form-control @error('image') is-invalid @enderror" id="image" value="{{old('image', $project->image)}}" required>
             </div>
         </div>
     </div>
@@ -29,7 +28,7 @@
             <div class="col-md-12">
                 <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
-                <textarea name="description" class="form-control" id="description" rows="3"> {{$project->description}}</textarea>
+                <textarea placeholder="Insert description here..." name="description" class="form-control @error('description') is-invalid @enderror" id="description" rows="3"> {{old('description',$project->description)}}</textarea>
                 </div>
             </div>  
         </div>

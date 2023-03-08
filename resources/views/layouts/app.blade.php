@@ -31,9 +31,14 @@
 
 
         <main class="container">
-            {{-- ALERT --}}
+            {{-- ALERT generic--}}
             @include('includes.alert')
-            
+
+            {{-- ALERT ERRORS ONLY FOR LOGGED USERS--}}
+            @auth
+            @include('includes.errors-alert')
+            @endauth
+
             @yield('content')
         </main>
         
