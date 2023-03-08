@@ -36,7 +36,7 @@
 
             {{-- ALERT ERRORS ONLY FOR LOGGED USERS--}}
             @auth
-            @include('includes.errors.session')
+            @include('includes.alerts.errors')
             @endauth
 
             @yield('content')
