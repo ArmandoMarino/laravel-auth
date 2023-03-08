@@ -19,11 +19,21 @@
         </div>
     </div>
 
-    {{-- BOTTON TO PROJECTS INDEX --}}
     <div class="d-flex justify-content-end" >
-        <a class="btn btn-secondary" href="{{route('admin.projects.index')}}">
+        {{-- BOTTON TO PROJECTS INDEX --}}
+        <a class="btn btn-secondary me-2" href="{{route('admin.projects.index')}}">
             <i class="me-2 fa-solid fa-left-long"></i> Back
         </a>
+
+        <form action="{{route('admin.projects.destroy', $project->id)}}" method="POST">
+            {{-- Method DELETE --}}
+            @method('DELETE')
+            {{-- TOKEN --}}
+            @csrf
+            <button type="submit" class="btn btn-small btn-danger" >
+              <i class="fa-solid fa-trash me-2"></i> Delete Project
+            </button>
+          </form>
     </div>
 </div>
 
