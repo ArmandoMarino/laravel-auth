@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
+use illuminate\Support\Str;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
@@ -32,7 +32,16 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        // Prendo lo SLUG nella costruzione data
+        $data['slug'] = Str::class($data['title'], '-');
+
+        $project = new Project();
+
+        $project->fill($data);
+        $project->save();
+
+        return to_route('admin.projects.show', $project->id);
     }
 
     /**
