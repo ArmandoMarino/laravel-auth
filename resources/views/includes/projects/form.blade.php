@@ -1,9 +1,10 @@
 {{-- IF EXIST in create (model)update else store --}}
+{{-- novalidate FOR CONTROL with CONTROLLER --}}
 @if($project->exists)
-<form method="POST" action=" {{route('admin.projects.update', $project->id)}}" class="mt-4">
+<form method="POST" action=" {{route('admin.projects.update', $project->id)}}" class="mt-4" novalidate>
 @method('PUT')
 @else
-<form method="POST" action=" {{route('admin.projects.store')}}" class="mt-4">
+<form method="POST" action=" {{route('admin.projects.store')}}" class="mt-4" novalidate>
 @endif
     
     @csrf
