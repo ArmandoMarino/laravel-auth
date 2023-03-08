@@ -25,7 +25,7 @@
             <i class="me-2 fa-solid fa-left-long"></i> Back
         </a>
 
-        <form action="{{route('admin.projects.destroy', $project->id)}}" method="POST">
+        <form action="{{route('admin.projects.destroy', $project->id)}}" class="delete-form" method="POST" data-entity='Project'>
             {{-- Method DELETE --}}
             @method('DELETE')
             {{-- TOKEN --}}
@@ -38,3 +38,4 @@
 </div>
 
 @endsection
+

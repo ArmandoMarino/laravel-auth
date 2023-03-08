@@ -34,7 +34,7 @@
                     <i class="fa-solid fa-eye"></i>
                 </a>
 
-                <form action="{{route('admin.projects.destroy', $project->id)}}" method="POST">
+                <form action="{{route('admin.projects.destroy', $project->id)}}" method="POST" class="delete-form" data-entity='Project'>
                   {{-- Method DELETE --}}
                   @method('DELETE')
                   {{-- TOKEN --}}
@@ -55,3 +55,4 @@
     </tbody>
   </table>
 @endsection
+
