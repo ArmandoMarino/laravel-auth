@@ -2,11 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
+// CONTROLLER
 use App\Http\Controllers\Controller;
+
+// SUPPORT function str
 use illuminate\Support\Str;
 
+// MODEL
 use App\Models\Project;
+
+// REQUEST for FORMS DATA
 use Illuminate\Http\Request;
+
+// FOR VALIDATION UNIQUE IN UPDATE RULE
+use Illuminate\Validation\Rule;
 
 class ProjectController extends Controller
 {
@@ -34,6 +43,23 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate(
+            [
+                'title' => 'required|string|unique:projects|min:5|max:50',
+                'description' => 'required|string',
+                'image' => 'nullable|url',
+            ],
+            [
+                'title.required' => 'Title field is required',
+                'title.unique' => "Project\'s title : $request->title has already been taken.",
+                'title.min' => 'The title field must have at least 5 characters',
+                'title.max' => 'The title field must have at least 50 characters',
+                'description.required' => 'Description field it cannot be empty',
+                'image.url' => 'Url is not Valid.',
+
+            ]
+        );
+
         $data = $request->all();
         // Prendo lo SLUG nella costruzione data
         $data['slug'] = Str::slug($data['title'], '-');
@@ -67,6 +93,24 @@ class ProjectController extends Controller
      */
     public function update(Request $request, project $project)
     {
+        $request->validate(
+            [
+                // UNIQUE IN THE PROJECTS TABLE and IGNORE PROJECT ID
+                'title' => ['required', 'string', Rule::unique('projects')->ignore($project->id), 'min:5', 'max:50'],
+                'description' => 'required|string',
+                'image' => 'nullable|url',
+            ],
+            [
+                'title.required' => 'Title field is required',
+                'title.unique' => "Project\'s title : $request->title has already been taken.",
+                'title.min' => 'The title field must have at least 5 characters',
+                'title.max' => 'The title field must have at least 50 characters',
+                'description.required' => 'Description field it cannot be empty',
+                'image.url' => 'Url is not Valid.',
+
+            ]
+        );
+
         $data = $request->all();
 
         $data['slug'] = Str::slug($data['title'], '-');
