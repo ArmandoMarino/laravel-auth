@@ -67,7 +67,10 @@ class ProjectController extends Controller
      */
     public function update(Request $request, project $project)
     {
-        $
+        $data = $request->all();
+
+        $data['slug'] = Str::slug($data['title'], '-');
+        $project->update($data);
     }
 
     /**

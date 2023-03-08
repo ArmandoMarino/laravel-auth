@@ -18,7 +18,7 @@
         <th scope="col">Slug</th>
         <th scope="col">Creato il</th>
         <th scope="col">Aggiornato il</th>
-        <th></th>
+        <th>Control Panel</th>
       </tr>
     </thead>
 
@@ -36,8 +36,13 @@
                     <i class="fa-solid fa-eye"></i>
                 </a>
 
+                {{-- BOTTON TO PROJECTS EDIT --}}
+                <a class="btn btn-warning mx-2" href="{{route('admin.projects.edit', $project->id)}}">
+                  <i class=" fa-solid fa-pencil"></i>
+                </a>
+
+                {{-- BUTTON DELETE --}}
                 <form action="{{route('admin.projects.destroy', $project->id)}}" method="POST" class="delete-form" data-entity='Project'>
-                  {{-- Method DELETE --}}
                   @method('DELETE')
                   {{-- TOKEN --}}
                   @csrf

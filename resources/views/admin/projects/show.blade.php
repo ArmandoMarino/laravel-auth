@@ -25,6 +25,11 @@
             <i class="me-2 fa-solid fa-left-long"></i> Back
         </a>
 
+        {{-- BOTTON TO PROJECTS EDIT --}}
+        <a class="btn btn-warning me-2" href="{{route('admin.projects.edit', $project->id)}}">
+            <i class="me-2 fa-solid fa-pencil"></i> Edit
+        </a>
+
         <form action="{{route('admin.projects.destroy', $project->id)}}" class="delete-form" method="POST" data-entity='Project'>
             {{-- Method DELETE --}}
             @method('DELETE')

@@ -1,5 +1,5 @@
 
-
+{{-- IF EXIST in create (model)update else store --}}
 @if($project->exsists)
 <form method="POST" action=" {{route('admin.projects.update')}}" class="mt-4">
 @method('PUT')
