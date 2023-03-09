@@ -8,6 +8,7 @@
     <h1>{{ $project->title }}</h1>
 </header>
 <div class="clearfix">
+    {{-- IMAGE --}}
     @if($project->image)
     {{-- la stampo da asset che punta in Public mettendo il prefisso del path --}}
     <img class="float-start" src="{{asset('storage/'. $project->image)}}" alt="{{$project->slug}}">
