@@ -25,6 +25,9 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(
 
     // PROJECTS ROUTES
     Route::resource('projects', ProjectController::class);
+
+    // CHECKBOX ROUTE with custom function on controller
+    Route::patch('/projects/{project}/toggle', [ProjectController::class, 'togglePublishProject'])->name('projects.toggle');
 });
 
 
