@@ -9,6 +9,7 @@
     
     @csrf
     <div class="row">
+        {{-- TITLE --}}
         <div class="col-md-6">
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
@@ -16,6 +17,15 @@
             </div>
         </div>
 
+        {{-- SLUG --}}
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="slug" class="form-label">Slug's Title</label>
+                <input type="text" class="form-control" id="slug" value="{{ Str::slug(old('title', $project->title),'-')}}" disabled>
+            </div>
+        </div>
+
+        {{-- IMAGE --}}
         <div class="col-md-6">
             <div class="mb-3">
                 <label for="image" class="form-label">Add image</label>
@@ -25,6 +35,7 @@
     </div>
 
     <div class="row">
+        {{-- DESCRIPTION --}}
         <div class="col">
             <div class="col-md-12">
                 <div class="mb-3">
@@ -48,3 +59,17 @@
         </a>
     </div>
 </form>
+
+
+@section('scripts')
+<script>
+// Prendiamo gli input dal form
+const slugInput = document.getElementById('slug');
+const titleInput = document.getElementById('title');
+
+// Metto un event listener sul title con il Blur ovvero dopo aver tolto il focus dal title si renderizza
+titleInput.addEventListener('blur',() => {
+    slugInput.value = titleInput.value.toLowerCase().split(' ').join('-');
+});
+</script>
+@endsection
