@@ -33,6 +33,15 @@
             <i class="me-2 fa-solid fa-pencil"></i> Edit
         </a>
 
+        {{-- BOTTON PUBLISH --}}
+        <form method="POST" action="{{route('admin.projects.toggle', $project->id)}}">
+            @method('PATCH')
+            @csrf
+            <button type="submit" class="btn- btn-outline-{{$project->is_published ? 'danger' : 'success'}}">
+                {{$project->is_published ? 'Put on Drafs' : 'Publish'}}
+            </button>
+          </form>
+
         <form action="{{route('admin.projects.destroy', $project->id)}}" class="delete-form" method="POST" data-entity='Project'>
             {{-- Method DELETE --}}
             @method('DELETE')
