@@ -57,9 +57,14 @@
             <td scope='row' colspan="5">Non ci sono Progetti</td>
         </tr>
         @endforelse
-    
-      
     </tbody>
   </table>
+
+  {{-- PAGINATION se project ha la pagination  --}}
+  <div class="d-flex">
+    @if($projects->hasPages())
+      {{$projects->links() }}
+    @endif
+  </div>
 @endsection
 
