@@ -9,7 +9,8 @@
 </header>
 <div class="clearfix">
     @if($project->image)
-    <img class="float-start" src="{{$project->image}}" alt="{{$project->slug}}">
+    {{-- la stampo da asset che punta in Public mettendo il prefisso del path --}}
+    <img class="float-start" src="{{asset('storage/'. $project->image)}}" alt="{{$project->slug}}">
     @endif
     <p>{{ $project->description }}</p>
     <div class="d-flex justify-content-between" >
