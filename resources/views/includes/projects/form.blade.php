@@ -58,21 +58,38 @@
                 <label for="description" class="form-label">Description</label>
                 <textarea placeholder="Insert description here..." name="description" class="form-control @error('description') is-invalid @enderror" id="description" rows="3"> {{old('description',$project->description)}}</textarea>
                 </div>
-            </div>  
+            </div> 
+            
+            <div class="col-md-12">
+                
+            </div> 
+
         </div>
+
+
     </div>
 
-    <div>
-        {{-- BUTTON UPDATE --}}
-        <button type="submit" class="btn btn-success">
-            <i class="fa-solid fa-floppy-disk"></i>
-            Save
-        </button>
-        {{-- LINK TO INDEX --}}
-        <a href="{{route('admin.projects.index')}}" class="btn btn-small btn-secondary">
-            <i class="fa-solid fa-left-long"></i>
-            Back
-        </a>
+    <div class="d-flex justify-content-between">
+        {{-- CHECKBOX PUBLISH --}}
+        <div class="form-check form-switch">
+            <input name="is_published" class="form-check-input" type="checkbox" role="switch" id="is_published" 
+            @if (old('is_published', $project->is_published)) checked @endif>
+            <label class="form-check-label" for="is_published">Published</label>
+        </div>
+
+        <div>
+            {{-- BUTTON UPDATE --}}
+            <button type="submit" class="btn btn-success">
+                <i class="fa-solid fa-floppy-disk"></i>
+                Save
+            </button>
+            {{-- LINK TO INDEX --}}
+            <a href="{{route('admin.projects.index')}}" class="btn btn-small btn-secondary">
+                <i class="fa-solid fa-left-long"></i>
+                Back
+            </a>
+        </div>
+       
     </div>
 </form>
 

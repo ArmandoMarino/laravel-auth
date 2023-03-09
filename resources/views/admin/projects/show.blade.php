@@ -18,6 +18,7 @@
         <div>
             <p>Creato il : <time>{{$project->created_at}} </time></p>
             <p>Aggiornato il : <time>{{$project->updated_at}} </time></p>
+            <p>Stato : {{ $project->is_published ? 'Pubblicato' : 'Bozza'}}</p>
         </div>
     </div>
 
