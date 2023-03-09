@@ -42,6 +42,12 @@
                 <input name="image" type="file" class="form-control" id="image">
             </div>
         </div>
+
+        <div class="col-md-6">
+            <div class="mb-3">
+                <img id="image-preview" src="{{$project->image ? asset('storage/' . $project->image) : 'https://picsum.photos/536/354'}}" alt="{{$project->slug}}">
+            </div>
+        </div>
     </div>
 
     <div class="row">
@@ -72,6 +78,8 @@
 
 
 @section('scripts')
+
+{{-- SLUG --}}
 <script>
 // Prendiamo gli input dal form
 const slugInput = document.getElementById('slug');
@@ -80,6 +88,30 @@ const titleInput = document.getElementById('title');
 // Metto un event listener sul title con il Blur ovvero dopo aver tolto il focus dal title si renderizza
 titleInput.addEventListener('blur',() => {
     slugInput.value = titleInput.value.toLowerCase().split(' ').join('-');
+});
+</script>
+
+{{-- PREVIEW --}}
+<script>
+// Prendiamo gli elementi dal dom
+const placeHolder = 'https://picsum.photos/536/354';
+const imageInput = document.getElementById('image');
+const imagePreview = document.getElementById('image-preview');
+
+// Ascolto il cambio del caricamento file
+imageInput.addEventListener('change', () =>{
+// Controolo se ho caricato il file e con imageInput.files (array) vedo se ci sono files
+if(imageInput.files && imageInput.files[0]){
+// il reader sarà (assegno) una funzione che lo legge un file
+let reader = new FileReader();
+// faccio leggere il file come URL (il file in questione)
+reader.readAsDataURL(imageInput.files[0]);
+// Quando sarà pronto con il metodo onLoad  e gli assegno il risultato della lettura (e)
+reader.onload = (e) => {
+    imagePreview.src = e.target.result;
+}
+
+} else imagePreview.setAttribute('src', placeHolder);
 });
 </script>
 @endsection
