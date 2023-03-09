@@ -13,7 +13,10 @@ use App\Models\Project;
 
 // REQUEST for FORMS DATA
 use Illuminate\Http\Request;
-
+// Arr function
+use Illuminate\Support\Arr;
+// Storage function
+use Illuminate\Support\Facades\Storage;
 // FOR VALIDATION UNIQUE IN UPDATE RULE
 use Illuminate\Validation\Rule;
 
@@ -47,7 +50,7 @@ class ProjectController extends Controller
             [
                 'title' => 'required|string|unique:projects|min:5|max:50',
                 'description' => 'required|string',
-                'image' => 'nullable|url',
+                'image' => 'nullable|image|mimes:jpeg,jpg,png',
             ],
             [
                 'title.required' => 'Title field is required',
@@ -55,7 +58,8 @@ class ProjectController extends Controller
                 'title.min' => 'The title field must have at least 5 characters',
                 'title.max' => 'The title field must have at least 50 characters',
                 'description.required' => 'Description field it cannot be empty',
-                'image.url' => 'Url is not Valid.',
+                'image.image' => 'Image is not Valid.',
+                'image.mimes' => 'Accepted extensions : jpeg,jpg,png.',
 
             ]
         );
@@ -66,7 +70,14 @@ class ProjectController extends Controller
 
         $project = new Project();
 
+        if (Arr::exists($data, 'image')) {
+            // $img_url restituisce l'url finale
+            $img_url = Storage::put('projects', $data['image']);
+            $data['image'] = $img_url;
+        };
+
         $project->fill($data);
+
         $project->save();
 
         return to_route('admin.projects.show', $project->id)->with('type', 'success')->with('New project created successfully');
@@ -114,6 +125,15 @@ class ProjectController extends Controller
         $data = $request->all();
 
         $data['slug'] = Str::slug($data['title'], '-');
+
+        if (Arr::exists($data, 'image')) {
+            // Se esiste un'immagine nel project la cancello
+            if ($project->image) Storage::delete($project->image);
+            // $img_url restituisce l'url finale e la sostituisco
+            $img_url = Storage::put('projects', $data['image']);
+            $data['image'] = $img_url;
+        };
+
         $project->update($data);
 
         return to_route('admin.projects.show', $project->id)->with('type', 'success')->with('message', "Project : $project->title updated successfully.");
