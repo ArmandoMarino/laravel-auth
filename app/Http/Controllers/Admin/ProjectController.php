@@ -77,7 +77,13 @@ class ProjectController extends Controller
             $data['image'] = $img_url;
         };
 
+        // CHECK DEL PUBLISH 
+        // controllo se arriva il booleano (name del check) come chiave perche se non è checcato il form non la invia 
+        $data['is_published'] = Arr::exists($data, 'is_published');
+
         $project->fill($data);
+
+
 
         $project->save();
 
@@ -135,6 +141,10 @@ class ProjectController extends Controller
             $data['image'] = $img_url;
         };
 
+        // CHECK DEL PUBLISH 
+        // controllo se arriva il booleano (name del check) come chiave perche se non è checcato il form non la invia 
+        $data['is_published'] = Arr::exists($data, 'is_published');
+
         $project->update($data);
 
         return to_route('admin.projects.show', $project->id)->with('type', 'success')->with('message', "Project : $project->title updated successfully.");
@@ -147,5 +157,19 @@ class ProjectController extends Controller
     {
         $project->delete();
         return to_route('admin.projects.index')->with('type', 'success')->with('message', "Project : $project->title saved successfully.");
+    }
+
+    // Nuova funzione personalizzata che "TOGGOLA" il is_published del project
+    public function togglePublishProject(Project $project)
+    {
+        $project->is_published = !$project->is_published;
+
+        // dopo il toggle imposto l'azione
+        $action = $project->is_published ? 'successfully published.' : 'saved as draft.';
+
+        $project->save();
+
+        // redirect con messaggio e azione personalizzata
+        return to_route('admin.projects.index')->with('type', 'success')->with('message', "The Project is $action");
     }
 }
