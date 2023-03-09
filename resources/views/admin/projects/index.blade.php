@@ -29,7 +29,16 @@
             <th scope="row">{{$project->id }}</th>
             <td>{{$project->title }}</td>
             <td>{{$project->slug }}</td>
-            <td>{{$project->is_published ? 'Published' : 'Not Published' }}</td>
+            <td>
+              <form method="POST" action="{{route('admin.projects.toggle', $project->id)}}">
+                @method('PATCH')
+                @csrf
+                <button type="submit" class="btn-btn-outline">
+                  <i class="fa-solid fa-toggle-{{$project->is_published ? 'on' : 'off'}}  {{$project->is_published ? 'text-success' : 'text-danger'}} " ></i>
+                </button>
+              </form>
+            </td>
+            {{-- <td>{{$project->is_published ? 'Published' : 'Not Published' }}</td> --}}
             <td>{{$project->created_at }}</td>
             <td>{{$project->updated_at }}</td>
             <td class="d-flex">
