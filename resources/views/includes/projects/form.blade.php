@@ -79,7 +79,7 @@
 
 @section('scripts')
 
-{{-- SLUG --}}
+{{--------------------- SLUG ---------------------------}}
 <script>
 // Prendiamo gli input dal form
 const slugInput = document.getElementById('slug');
@@ -91,7 +91,7 @@ titleInput.addEventListener('blur',() => {
 });
 </script>
 
-{{-- PREVIEW --}}
+{{--------------------- PREVIEW ---------------------------}}
 <script>
 // Prendiamo gli elementi dal dom
 const placeHolder = 'https://picsum.photos/536/354';
