@@ -16,8 +16,9 @@
         <th scope="col">#</th>
         <th scope="col">Title</th>
         <th scope="col">Slug</th>
-        <th scope="col">Creato il</th>
-        <th scope="col">Aggiornato il</th>
+        <th scope="col">Status</th>
+        <th scope="col">Created at</th>
+        <th scope="col">Updated at</th>
         <th>Control Panel</th>
       </tr>
     </thead>
@@ -28,6 +29,7 @@
             <th scope="row">{{$project->id }}</th>
             <td>{{$project->title }}</td>
             <td>{{$project->slug }}</td>
+            <td>{{$project->is_published ? 'Published' : 'Not Published' }}</td>
             <td>{{$project->created_at }}</td>
             <td>{{$project->updated_at }}</td>
             <td class="d-flex">
