@@ -1,10 +1,12 @@
 {{-- IF EXIST in create (model)update else store --}}
 {{-- novalidate FOR CONTROL with CONTROLLER --}}
+{{-- enctype="multipart/form-data" nei form quando voglio mandare dei file --}}
+
 @if($project->exists)
-<form method="POST" action=" {{route('admin.projects.update', $project->id)}}" class="mt-4" novalidate>
+<form method="POST" action=" {{route('admin.projects.update', $project->id)}}" class="mt-4" enctype="multipart/form-data" novalidate>
 @method('PUT')
 @else
-<form method="POST" action=" {{route('admin.projects.store')}}" class="mt-4" novalidate>
+<form method="POST" action=" {{route('admin.projects.store')}}" class="mt-4" enctype="multipart/form-data" novalidate>
 @endif
     
     @csrf
@@ -25,11 +27,19 @@
             </div>
         </div>
 
-        {{-- IMAGE --}}
-        <div class="col-md-6">
+        {{-- IMAGE URL --}}
+        {{-- <div class="col-md-6">
             <div class="mb-3">
                 <label for="image" class="form-label">Add image</label>
                 <input placeholder="Insert URL image here..." name="image" type="url" class="form-control @error('image') is-invalid @enderror" id="image" value="{{old('image', $project->image)}}" required>
+            </div>
+        </div> --}}
+
+        {{-- UPLOAD IMG --}}
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="image" class="form-label">Upload image</label>
+                <input name="image" type="file" class="form-control" id="image">
             </div>
         </div>
     </div>
