@@ -37,7 +37,7 @@
         <form method="POST" action="{{route('admin.projects.toggle', $project->id)}}">
             @method('PATCH')
             @csrf
-            <button type="submit" class="btn- btn-outline-{{$project->is_published ? 'danger' : 'success'}}">
+            <button type="submit" class="btn me-2 btn-outline-{{$project->is_published ? 'danger' : 'success'}}">
                 {{$project->is_published ? 'Put on Drafs' : 'Publish'}}
             </button>
           </form>

@@ -33,7 +33,7 @@
               <form method="POST" action="{{route('admin.projects.toggle', $project->id)}}">
                 @method('PATCH')
                 @csrf
-                <button type="submit" class="btn-btn-outline">
+                <button type="submit" class="btn">
                   <i class="fa-solid fa-toggle-{{$project->is_published ? 'on' : 'off'}}  {{$project->is_published ? 'text-success' : 'text-danger'}} " ></i>
                 </button>
               </form>
